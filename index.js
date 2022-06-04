@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 4000;
+const gplay = require('google-play-scraper');
+let data = []
 
 app.use((req, res, next) => {
   res.append('Access-Control-Allow-Origin', ['*']);
@@ -8,36 +10,191 @@ app.use((req, res, next) => {
   res.append('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
+let Array = [
+//   "truecaller"  
+//  ,"spotify.music"
+//  ,"facebook.lite"
+//  ,"moonvideo.android.resso"
+//  ,"outfit7.mytalkingtom2"
+//  ,"meesho.supply"
+//  ,"application.zomato"
+//  ,"ohalla.video.lite"
+//  ,"brave.browser"
+//  ,"whereismytrain.android"
+//  ,"imo.android.imoim"
+//  ,"makemytrip"  
+//  ,"ak.ta.dainikbhaskar.activity"
+//  ,"sbi.SBIFreedomPlus"
+//  ,"ubercab.uberlite"
+//  ,"bt.bms"
+//  ,"myntra.android"
+//  ,"opera.mini.native"
+//  ,"truecaller"  
+//  ,"facebook.lite"
+//  ,"microsoft.teams"
+//  ,"adobe.reader"
+//  ,"supercell.clashroyale"  
+//  ,"activision.callofduty.shooter"  
 
+,"com.whatsapp"
+,"com.instagram.android"
+,"com.facebook.katana"
+,"org.telegram.messenger"
+,"com.whatsapp.w4b"
+// ,"com.niksoftware.snapseed"
+// ,"com.king.candycrushsaga"
+// ,"com.kiloo.subwaysurf"
+// ,"com.truecaller"
+// ,"com.instagram.lite"
+// ,"com.google.earth"
+// ,"com.nekki.shadowfight3"
+// ,"com.niksoftware.snapseed"
+// ,"com.google.android.apps.paidtasks"
+// ,"com.gameloft.android.ANMP.GloftA9HM"
+// ,"com.google.android.apps.meetings"
+// ,"com.gameloft.android.ANMP.GloftA8HM"
+// ,"com.fingersoft.hcr2"
+// ,"com.adobe.scan.android"
+// ,"com.nekki.shadowfightarena"
+// ,"com.google.android.street"
+// ,"com.truecaller.guardians"
+// ,"com.olacabs.customer"
+// ,"com.adobe.scan.android"
+// ,"com.google.android.apps.chromecast.app"
+// ,"com.truecaller"
+// ,"com.google.android.apps.accessibility.voiceaccess"
+// ,"com.xiaomi.midrop"
+// ,"org.mozilla.firefox"
+// ,"com.amazon.dee.app"
+// ,"com.brave.browser"
+// ,"com.google.android.apps.photos.scanner"
+// ,"mega.privacy.android.app"
+// ,"com.google.android.apps.meetings"
+// ,"com.microsoft.teams"
+// ,"com.google.android.apps.dynamite"
+// ,"com.linkedin.android"
+// ,"com.cisco.webex.meetings"
+// ,"com.mi.global.shop"
+// ,"net.one97.paytm"
+// ,"com.Dominos"
+// ,"com.ticno.olymptrade"
+// ,"albums.gallery.photo.folder.picasa.app.web.gallery"
+// ,"app.arcopypaste"
+// ,"com.BGMI.logomaker"
+// ,"com.adobe.lrmobile"
+// ,"com.adobe.psmobile"
+// ,"com.adsk.sketchbook"
+// ,"com.arusaquotes"
+// ,"com.baiwang.styleinstaboxsnap"
+// ,"com.bereal.ft"
+// ,"com.canva.editor"
+// ,"com.instagram.lite"
+// ,"org.thunderdog.challegram"
+// ,"com.google.android.apps.blogger"
+// ,"org.thoughtcrime.securesms"
+// ,"com.kutumb.android"
+// ,"com.reddit.frontpage"
+// ,"com.cardfeed.video_public"
+// ,"com.next.innovation.takatak"
+// ,"in.mohalla.sharechat"
+// ,"com.eterno.shortvideos"
+// ,"com.google.android.apps.messaging"
+// ,"us.zoom.videomeetings"
+// ,"com.snapchat.android"
+// ,"com.discord"
+// ,"org.mozilla.firefox"
+// ,"org.thoughtcrime.securesms"
+// ,"com.opera.browser"
+// ,"com.cisco.webex.meetings"
+// ,"com.opera.mini.native"
+// ,"org.videolan.vlc"
+// ,"com.cyberlink.powerdirector.DRA140225_01"
+// ,"com.nexstreaming.app.kinemasterfree"
+// ,"com.viki.android"
+// ,"com.application.zomato"
+// ,"com.amazon.kindle"
+// ,"in.startv.hotstar"
+// ,"com.linkedin.android"
+// ,"com.byjus.thelearningapp"
+// ,"com.gaana"
+// ,"com.magicfluids"
+// ,"ch.threema.app"
+// ,"jp.ne.ibis.ibispaint.app"
+// ,"com.ndemiccreations.scenariocreator"
+// ,"com.psslabs.rhythmpaid"
+// ,"com.digidust.elokence.akinator.paid"
+// ,"com.simplemobiletools.gallery.pro"
+// ,"com.sunglab.triplea"
+// ,"com.codepoint.learnpython3pro"
+// ,"example.matharithmetics_pro"
+// ,"ipnossoft.rma.free"
+// ,"cc.forestapp"
+// ,"com.alibaba.intl.android.apps.poseidon"
+// ,"com.shikudo.fitrpg.google"
+// ,"com.bumble.app"
+// ,"com.david.android.languageswitch"
+// ,"com.uptime"
+// ,"com.womanlog"
+// ,"com.microsoft.appmanager"
+// ,"com.microsoft.skydrive"
+// ,"com.voyagerx.scanner"
+// ,"cn.wps.moffice_eng"
+// ,"com.mventus.selfcare.activity"
+// ,"com.truecaller"
+// ,"com.flipkart.android"
+// ,"com.facebook.lite"
+// ,"com.imo.android.imoim"
+// ,"com.ak.ta.dainikbhaskar.activity"
+// ,"com.mxtech.videoplayer.ad"
+// ,"com.gaana"
+// ,"com.eterno"
+// ,"com.makemytrip"
+// ,"net.one97.paytm"
+// ,"com.google.socratic"
+// ,"com.google.android.apps.classroom"
+// ,"com.vedantu.app"
+// ,"com.reallearning.questt"
+// ,"com.byjus.thelearningapp"
+// ,"com.unacademyapp"
+// ,"com.doubtnutapp"
+// ,"com.teachmint.teachmint"
+// ,"app.homework.solve"
+// ,"in.gov.diksha.app"
+// ,"com.next.innovation.takatak"
+// ,"mobisocial.arcade"
+// ,"com.eterno.shortvideos"
+// ,"com.google.android.play.games"
+// ,"com.amazon.avod.thirdpartyclient"
+// ,"com.mambet.tv"
+// ,"com.sonyliv"
+// ,"tv.twitch.android.app"
+// ,"com.viki.android"
+// ,"com.reddit.frontpage"
+// ,"in.startv.hotstar"
+// ,"com.microsoft.xboxone.smartglass"
+// ,"com.graymatrix.did"
+// ,"com.frontrow.vlog"
+// ,"com.snowcorp.vita"
+// ,"com.nexstreaming.app.kinemasterfree"
+// ,"com.moonvideo.android.resso"
+// ,"com.spotify.lite"
+// ,"com.gamestar.pianoperfect"
+// ,"com.gaana"
+// ,"com.bsbportal.music"
+// ,"com.smule.singandroid"
+// ,"com.radio.pocketfm"
+ ,"microsoft.skydrive"]
+
+for(i=0;i<Array.length;i++){
+gplay.app({appId : Array[i]})
+  .then((value)=>{
+    data.push(value);
+    console.log(data);
+  })
+}
 app.get('/',(req,res)=>{
-    let data = [
-        {
-          title: "World of Warships",
-          imgsrc:
-            "https://prs.sftcdn.net/softoniccom/0dc7f3ab-ca81-4e51-9beb-03f65f867680_WoWs_Softonic_banners_bis_282x388.jpg?auto=compress,format",
-          goto: "https://track.wg-aff.com/click?pid=339&offer_id=54&sub1=card_homepage",
-        },
-       
-        {
-          title: "Game of Thrones - Winter is coming",
-          imgsrc:
-            "https://prs.sftcdn.net/softoniccom/846b5ae9-f3d6-4d44-84ab-61f9f9eda6a7_EN_282x388_got_01.jpg?auto=compress,format",
-          goto: "  https://www.ostlon.com/cmp/2ZT4148/DMH3BM/?sub1=card_homepage",
-        },
-        {
-          title: "GTA V Premium Edition",
-          imgsrc:
-            "https://prs.sftcdn.net/softoniccom/e587fd0e-3ec4-4a7b-a6e2-4e65379d7909_GTA+V.jpg?auto=compress,format",
-          goto: "https://www.eneba.com/rockstar_social_club-grand-theft-auto-v-premium-online-edition-rockstar-social-club-key-global?af_id=SFT_HP",
-        },
-        {
-          title: "Left to Survive",
-          imgsrc:
-            "https://prs.sftcdn.net/softoniccom/a2ef560b-f57c-4402-afb8-0c98ef681ffa_lefttosurvive.jpeg?auto=compress,format",
-          goto: "https://gamesvid.go2cloud.org/aff_c?offer_id=3300&aff_id=1432&url_id=9794&aff_sub=card_homepage",
-        },
-      ];
-      res.send(data);   
+  // data = [];
+      res.send(data);  
 })
 
 app.listen(PORT,()=>{
